@@ -8,3 +8,10 @@ Up until 2019, the school would manually update their signs on a weekly basis. S
 
 ## Requirements
 The school preferred the use of Google Slides, and thus any script must be written in Google Apps Script, which is essentially Javascript using the API in Docs, Sheets, and Slides.
+
+## Files
+### Calendar.js
+Retrieves event information from the HMC site and populates a sheet. The dates and information text is separated for easier use in Main.js
+
+### Main.js
+Main code that populates the slides. In the Google Apps Code Editor, it is set to rune once a day at midnight.
