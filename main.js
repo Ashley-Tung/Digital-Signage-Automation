@@ -6,8 +6,8 @@ Ashley Tung '22
 atung@g.hmc.edu
 **/
 
-/** Updated in 2022
-**/
+/** Updated by Ashley Tung '22
+in September '21
 
 
 /*
@@ -16,7 +16,7 @@ If you want to make changes to the default agenda items present in spreadsheet, 
 */
 
 // Declares IDs
-var dataSpreadsheetId = 'spreadsheet_id';
+var dataSpreadsheetId = 'data-spreadsheet-id';
 
 // Uses the Sheets API to load data from agenda sheet
 var sheet = SpreadsheetApp.openById(dataSpreadsheetId);
@@ -32,10 +32,10 @@ var imgCount = 0;
 
 //Creates digital signs slides with updated textbox
 function slidesGenerator() { 
-  storeData();
-  insertImages();
-  createBox();
-  insertNews();
+  storeData(); // Store event and news data from spreadsheets
+  insertImages(); // Create slides for every image in the "Fliers" folder
+  createBox(); // Create textbox to insert event daya
+  insertNews(); // Insert news data
 }
 
 
@@ -70,33 +70,30 @@ function insertImages() {
 
 
   // 09/09/2021
-  // Please have image files in the folder! At this point, I would not recommned adding an mp4 file
-  // Since the video will not play until someone manually clicks it (and play it again when it ends)
+  // Please have ONLY image files in the folder! SlidesApp cannot insert videos into the slides
   while (files.hasNext()) {
     
     var file = files.next();
     
     if (DriveApp.getFileById(file.getId()).getMimeType() != "video/mp4") {
+      
       // Make new slides
       var newSlide = SlidesApp.getActivePresentation().appendSlide(SlidesApp.PredefinedLayout.BLANK);
 
       // Set slide background
-      // Make sure link sharing is ON to anyone with the link
-      var image = DriveApp.getFileById('1ile_id').getBlob();
-      //var newSlide = SlidesApp.getActivePresentation().getSlides()[currSlide.length - 1];
-
-      
+      // IMPORTANT NOTE - Images need to have link sharing ON
+      var image = DriveApp.getFileById('slide-background-image-id').getBlob();
       newSlide.insertImage(image);
       
       // Set slide image
       // IMPORTANT NOTE - Images need to have link sharing ON
-      newSlide.insertImage(DriveApp.getFileById(file.getId()), 50, 0, 380, 380);
+      newSlide.insertImage(DriveApp.getFileById(file.getId()), 50, 60, 380, 300);
       imgCount++;
     }
   }
 }
 
-
+// Creates textbos to insert event information
 function createBox() {
   var numOfSlide = SlidesApp.getActivePresentation().getSlides().length;
 
@@ -105,7 +102,7 @@ function createBox() {
     var slideIter = SlidesApp.getActivePresentation().getSlides()[i];
 
     // Insert text box on the (just added) first slide of presentation.
-    var titleShape = slideIter.insertShape(SlidesApp.ShapeType.TEXT_BOX, 500, 55, 200, 30);
+    var titleShape = slideIter.insertShape(SlidesApp.ShapeType.TEXT_BOX, 500, 50, 200, 30);
     var textRange = titleShape.getText();
     
     // Add the title of the box
@@ -114,7 +111,7 @@ function createBox() {
     textRange.getTextStyle().setFontSize(14).setBold(true);
     
     // Append the rest of the events to another textbox
-    var eventShape = slideIter.insertShape(SlidesApp.ShapeType.TEXT_BOX, 500, 80, 200, 300);
+    var eventShape = slideIter.insertShape(SlidesApp.ShapeType.TEXT_BOX, 500, 72, 200, 300);
     textRange = eventShape.getText();
     var dateText;
     var eventText;
@@ -129,12 +126,13 @@ function createBox() {
         break;
       }
       
+      // Formatting according to recommendations
       dateText = textRange.appendText(string);
       dateText.getTextStyle().setFontSize(11).setBold(true);
       
       // Update length with length from newly appended string
       eventText = textRange.appendText(' ' + eventArr[j] + '\n\n');
-      eventText.getTextStyle().setFontSize(11).setBold(false);
+      eventText.getTextStyle().setFontSize(10.75).setBold(false);
     }
     
     // Add final lines to box
@@ -154,7 +152,7 @@ function createBox() {
 function insertNews() {
 
   // Retrieving news info
-  var response = UrlFetchApp.fetch('news_site_url').getContentText();
+  var response = UrlFetchApp.fetch('http://www.hmc.edu/non-wp-sites/news/').getContentText();
   var begin = response.indexOf('<p><span>',1) +9//starting substring
   var finish = response.indexOf('</p>',begin) // finishing substring
   var eventString = response.substring(begin, finish);
@@ -172,6 +170,7 @@ function insertNews() {
   }
   
   var numOfSlide = SlidesApp.getActivePresentation().getSlides().length;
+  
   //Placing news banner on slides
   for (var i = 0; i < numOfSlide; i++) {
   
