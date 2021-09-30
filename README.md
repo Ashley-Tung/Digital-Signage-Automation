@@ -14,4 +14,4 @@ The school preferred the use of Google Slides, and thus any script must be writt
 Retrieves event information from the HMC site and populates a sheet. The dates and information text is separated for easier use in Main.js
 
 ### Main.js
-Main code that populates the slides. In the Google Apps Code Editor, it is set to rune once a day at midnight.
+Main code that populates the slides. In the Google Apps Code Editor, it is set to run once a day at midnight, or however often Dining Services or Administration wishes.
