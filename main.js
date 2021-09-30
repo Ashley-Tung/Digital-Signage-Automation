@@ -4,7 +4,7 @@ from the HMC news and events site
 Written in Spring 2020 by
 Suki Liang '21
 Samuel Nunoo '22
-Shanaya Stephenson '22
+Shanaya Stephenson '21
 Ashley Tung '22
 
 Updated by Ashley Tung '22
@@ -13,9 +13,9 @@ in September '21
 
 /*
 -----If changes are needed-----
-To change number of events shown, please go to Calendar list -> Code Editor -> change value in numOfDays
-To change the background image, please update the id on line 87
-To change the images on the slides, please do so in the "Fliers" Folder.
+To change number of events shown, please go to Calendar list -> Tools -> Code Editor -> change value in numOfEvents
+To change the background image, please update the id on line 88
+To change the images on the slides, upload or delete any images in the "Fliers" Folder
 */
 
 // Declares IDs
