@@ -1,21 +1,21 @@
 /*
 Digital Signs code to automatically update
 from the HMC news and events site
-Written in Spring 2020 by
+Written in Summer 2019 by
 Suki Liang '21
 Samuel Nunoo '22
-Shanaya Stephenson '21
+Shanaya Stephenson '20
 Ashley Tung '22
 
 Updated by Ashley Tung '22
-in September '21
+in September - October '21
 */
 
 /*
 -----If changes are needed-----
-To change number of events shown, please go to Calendar list -> Tools -> Code Editor -> change value in numOfEvents
+To change number of events shown, please go to Calendar List Sheets -> Tools -> Code Editor -> change value in numOfEvents
 To change the background image, please update the id on line 88
-To change the images on the slides, upload or delete any images in the "Fliers" Folder
+To change the images on the slides, upload or delete any images in the "Fliers" Folder (please do not include mp4 files)
 */
 
 // Declares IDs
